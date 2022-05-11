@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
-#include "../loci/coords.h"
+#include "../parser-obj/parse-obj.h"
 
 // A simple test function to insert into the main function.
 int run_sample() {
@@ -23,5 +23,11 @@ int run_sample() {
     printf("a / b are:\n%s", print_coords(&c));
     printf("ds(a,b): %ld\n", ds_coords(&a, &b));
     printf("dt(a,b): %ld\n", dt_coords(&a, &b));
+    printf("Opening obj file.");
+    char *fpath = "../examples/sponza.obj";
+    struct CoordVec example_points = parse_obj_from_file(fpath, 1000.0);
+    for(int i=0; i< example_points.len; i++) {
+      print_coords(&example_points.coords[i]);
+    }
     return 0;
 }
