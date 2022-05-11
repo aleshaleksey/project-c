@@ -6,5 +6,4 @@ gcc src/loci/coords.c \
   src/main.c \
   -Wall \
   -O3 -o build/project-march -lm
-echo "Build project-march. Running..."
-build/project-march
+echo "Built project-march."

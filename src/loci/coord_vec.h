@@ -5,7 +5,18 @@ struct CoordVec {
   int64_t len;
 };
 
-struct CoordVec new_empty();
-struct CoordVec new_with_cap(int64_t cap);
-void push(struct CoordVec *vec, struct Coords next_coord);
-struct Coords *pop(struct CoordVec *vec);
+struct CoordPath {
+  struct Coords *coords;
+  int64_t len;
+  int64_t distance;
+};
+
+struct CoordVec coordvec_new_empty();
+struct CoordVec coordvec_new_with_cap(int64_t cap);
+void coordvec_push(struct CoordVec *vec, struct Coords next_coord);
+struct Coords *coordvec_pop(struct CoordVec *vec);
+struct CoordPath coordpath_create(
+    struct CoordVec *vec,
+    int64_t idx_s,
+    int64_t idx_e
+);
