@@ -5,4 +5,4 @@ src/coords/coordvec.c \
 src/parsers/parser-obj.c \
 src/examples/examples.c \
 src/main.c \
--O3
+-O3 -lm

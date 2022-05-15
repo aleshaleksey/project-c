@@ -9,7 +9,7 @@ struct Coords {
 };
 
 // Functions for creating and displaying coordinates.
-struct Coords coords_new(int64_t x, int64_t y, int64_t y, int64_t t);
+struct Coords coords_new(int64_t x, int64_t y, int64_t z, int64_t t);
 char *coords_as_string(struct Coords *in);
 void coords_print(struct Coords *in);
 
