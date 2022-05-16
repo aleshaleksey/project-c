@@ -21,4 +21,10 @@ void examples_basic_work(){
 	printf("b-a distance = %ld\n", coords_distance(&b, &a));
 }
 
-void examples_parse_obj(char *file_path) {}
+void examples_parse_obj(char *file_path) {
+	struct CoordVec teapot = parse_obj(file_path, 1000.0);
+	printf("teapot point count = %ld\n", teapot.len);
+	for(int i = 0; i < teapot.len; i++) {
+		coords_print(&teapot.coords[i]);
+	}
+}
