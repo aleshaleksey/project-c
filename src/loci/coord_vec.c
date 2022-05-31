@@ -19,7 +19,12 @@ struct CoordVec coordvec_new_with_cap(int64_t cap) {
 
 void coordvec_push(struct CoordVec *vec, struct Coords next_coord) {
     // TODO: allocate more!
-    vec->coords = (struct Coords *)realloc((void *)vec->coords, vec->len + 1);
+    if(vec->len%20==0) {
+      vec->coords = (struct Coords *)realloc(
+        (void *)vec->coords,
+        sizeof(struct Coords) * (vec->len + 20)
+      );
+    }
     vec->coords[vec->len] = next_coord;
     vec->len++;
 }

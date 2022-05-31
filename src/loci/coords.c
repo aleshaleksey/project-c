@@ -83,8 +83,8 @@ int64_t len_coords(struct Coords *a) {
 }
 
 // Display a coordinate point.
-char *print_coords(struct Coords *coords) {
-    char *output = (char *)malloc(sizeof(char) * 200);
+char *coords_str(struct Coords *coords) {
+    char *output = (char *)malloc(sizeof(char) * 1000);
     sprintf(
       output,
 "Coords {\n  x: %ld,\n  y: %ld,\n  z: %ld,\n  t: %ld,\n}\n",
@@ -94,4 +94,16 @@ char *print_coords(struct Coords *coords) {
         coords->t
     );
     return output;
+}
+
+// Display a coordinate point.
+void coords_print(struct Coords *coords) {
+    printf(
+"Coords {\n  x: %ld,\n  y: %ld,\n  z: %ld,\n  t: %ld,\n}\n",
+        coords->x,
+        coords->y,
+        coords->z,
+        coords->t
+    );
+    return;
 }

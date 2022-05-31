@@ -13,4 +13,5 @@ struct Coords div_coords(struct Coords *a, struct Coords *b);
 int64_t ds_coords(struct Coords *a, struct Coords *b);
 int64_t dt_coords(struct Coords *a, struct Coords *b);
 int64_t len_coords(struct Coords *a);
-char *print_coords(struct Coords *coords);
+char *coords_str(struct Coords *coords);
+void coords_print(struct Coords *coords);
