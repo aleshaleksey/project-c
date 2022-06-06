@@ -44,10 +44,14 @@ struct CoordVec parse_obj_from_file(char *obj, double scale) {
   struct CoordVec output = coordvec_new_empty();
   // While not at the end keep going.
   printf("About to start with working on the file.\n");
-  char *input_str = (char *)calloc(400, sizeof(char));
+  int alloc_len = 400;
+  char *input_str = (char *)calloc(alloc_len, sizeof(char));
   int n = 0;
   while((c = fgetc(file)) != EOF) {
-    if(n>=400) { printf("About to overflow on N!\n"); }
+    if(n>=alloc_len) {
+      alloc_len*= 2;
+      input_str = (char *)realloc((void *) input_str, alloc_len);
+    }
     if(c =='\n') {
       // Process the line and clear the string.
       process_chunk(input_str, &output, scale);

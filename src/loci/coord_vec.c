@@ -44,6 +44,27 @@ struct Coords *coordvec_pop(struct CoordVec *vec) {
     return out;
 }
 
+// Gets the physical length of the coordinate vector in its current order.
+int64_t coordvec_s_len(struct CoordVec *vec) {
+  if(vec->len < 2) { return 0; }
+  int64_t output = 0;
+  for(long i=0; i<vec->len - 1; i++) {
+    output+= ds_coords(&vec->coords[i], &vec->coords[i+1]);
+  }
+  return output;
+}
+
+// Gets the temporal length of the coordinate vec based on the t value
+// in its current order.
+int64_t coordvec_t_len(struct CoordVec *vec) {
+  if(vec->len < 2) { return 0; }
+  int64_t output = 0;
+  for(long i=0; i<vec->len - 1; i++) {
+    output+= dt_coords(&vec->coords[i], &vec->coords[i+1]);
+  }
+  return output;
+}
+
 // This function is designed to create a shortest path between two points in a
 // Coords set. One must specify the indices of the points in the vector.
 struct CoordPath coordpath_create(
@@ -59,7 +80,6 @@ struct CoordPath coordpath_create(
       path.coords = NULL;
       return path;
   }
-
 
   return path;
 }

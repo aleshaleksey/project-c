@@ -23,12 +23,18 @@ int run_sample() {
     printf("a / b are:\n%s", coords_str(&c));
     printf("ds(a,b): %ld\n", ds_coords(&a, &b));
     printf("dt(a,b): %ld\n", dt_coords(&a, &b));
-    printf("Opening obj file.\n");
+
+    printf("Opening obj file (unit is 'milli'-whatever).\n");
     char *fpath = "examples/sponza.obj";
     struct CoordVec example_points = parse_obj_from_file(fpath, 1000.0);
     printf("example_points.len=%ld\n", example_points.len);
-    for(int i=0; i<example_points.len; i++) {
-      coords_print(&example_points.coords[i]);
-    }
+    printf("First and last point:\n");
+    coords_print(&example_points.coords[0]);
+    coords_print(&example_points.coords[example_points.len-1]);
+
+    int64_t s_len = coordvec_s_len(&example_points);
+    printf("Physical length of point vec = %ld\n", s_len);
+    int64_t t_len = coordvec_t_len(&example_points);
+    printf("Temporal length of point vec = %ld\n", t_len);
     return 0;
 }
