@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "parse-obj.h"
+#include "../base-helper/base-helper.h"
 
 // A bit for processing a line of text and converting to coordinates.
 int process_chunk(
@@ -49,7 +50,7 @@ struct CoordVec parse_obj_from_file(char *obj, double scale) {
   int n = 0;
   while((c = fgetc(file)) != EOF) {
     if(n>=alloc_len) {
-      alloc_len*= 2;
+      alloc_len = base_recalc_cap(alloc_len);
       input_str = (char *)realloc((void *) input_str, alloc_len);
     }
     if(c =='\n') {

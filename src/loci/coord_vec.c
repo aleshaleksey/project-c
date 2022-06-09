@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "coord_vec.h"
+#include "../base-helper/base-helper.h"
 
 struct CoordVec coordvec_new_empty() {
     struct CoordVec output;
@@ -22,7 +23,7 @@ void coordvec_push(struct CoordVec *vec, struct Coords next_coord) {
     if(vec->len%20==0) {
       vec->coords = (struct Coords *)realloc(
         (void *)vec->coords,
-        sizeof(struct Coords) * (vec->len + 20)
+        sizeof(struct Coords) * base_recalc_cap(vec->len)
       );
     }
     vec->coords[vec->len] = next_coord;
@@ -35,7 +36,8 @@ struct Coords *coordvec_pop(struct CoordVec *vec) {
     vec->len--;
     // Deallocate as necessary.
     if(vec->len%20 == 0) {
-        vec->coords = (struct Coords *)realloc((void *)vec->coords, vec->len);
+      long l = vec->len * sizeof(struct Coords);
+        vec->coords = (struct Coords *)realloc((void *)vec->coords, l);
     }
 
     struct Coords last = vec->coords[vec->len];
