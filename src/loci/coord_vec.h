@@ -3,11 +3,13 @@
 struct CoordVec {
   struct Coords *coords;
   int64_t len;
+  int64_t cap;
 };
 
 struct CoordPath {
   struct Coords *coords;
   int64_t len;
+  int64_t cap;
   int64_t distance;
 };
 

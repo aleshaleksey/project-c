@@ -8,6 +8,7 @@ struct CoordVec coordvec_new_empty() {
     struct CoordVec output;
     output.coords = (struct Coords *)malloc(sizeof(struct Coords) * 10);
     output.len = 0;
+    output.cap = 10;
     return output;
 }
 
@@ -15,15 +16,18 @@ struct CoordVec coordvec_new_with_cap(int64_t cap) {
     struct CoordVec output;
     output.coords = (struct Coords *)malloc(sizeof(struct Coords) * cap);
     output.len = 0;
+    output.len = cap;
     return output;
 }
 
 void coordvec_push(struct CoordVec *vec, struct Coords next_coord) {
     // TODO: allocate more!
-    if(vec->len%20==0) {
+    // printf("l=%ld, c=%ld\n", vec->len, vec->cap);
+    if(vec->cap <= vec->len) {
+       vec->cap = base_recalc_cap(vec->len);
       vec->coords = (struct Coords *)realloc(
         (void *)vec->coords,
-        sizeof(struct Coords) * base_recalc_cap(vec->len)
+        sizeof(struct Coords) * vec->cap
       );
     }
     vec->coords[vec->len] = next_coord;
@@ -37,7 +41,8 @@ struct Coords *coordvec_pop(struct CoordVec *vec) {
     // Deallocate as necessary.
     if(vec->len%20 == 0) {
       long l = vec->len * sizeof(struct Coords);
-        vec->coords = (struct Coords *)realloc((void *)vec->coords, l);
+      vec->coords = (struct Coords *)realloc((void *)vec->coords, l);
+      vec->cap = l;
     }
 
     struct Coords last = vec->coords[vec->len];

@@ -21,15 +21,14 @@ int process_chunk(
     // printf("Line too short (%d)\n", taken);
     return 1;
   }
-  // TODO look up double to int64_t conversion.
+
   struct Coords coords;
   coords.t = 0;
   coords.x = rint(x * scale);
   coords.y = rint(y * scale);
   coords.z = rint(z * scale);
-  // printf("About to push..\n");
+  // coords_print(&coords);
   coordvec_push(output, coords);
-  // printf("Pushed..\n");
   return 0;
 }
 
@@ -55,6 +54,7 @@ struct CoordVec parse_obj_from_file(char *obj, double scale) {
     }
     if(c =='\n') {
       // Process the line and clear the string.
+      // printf("Processing chunk: %s\n", input_str);
       process_chunk(input_str, &output, scale);
       for(int i=0;i<n;i++) { input_str[i] = 0; }
       n = 0;
