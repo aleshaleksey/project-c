@@ -8,6 +8,8 @@
 #include "examples/main_examples.h"
 
 int main(int argc, char **argv) {
-  printf("Tests will run here once they are ready.\n");
+  printf("\nTests will run here once they are ready.\n\n");
   recalc_tests();
+  coords_tests();
+  printf("\nTesting `project-march` over.\n\n");
 }
