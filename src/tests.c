@@ -3,6 +3,7 @@
 #include "tests/parse_tests.h"
 #include "tests/base_tests.h"
 #include "tests/coords_tests.h"
+#include "tests/coord_vec_tests.h"
 #include "tests/parse_tests.h"
 #include "examples/main_examples.h"
 

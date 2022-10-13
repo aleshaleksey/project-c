@@ -7,6 +7,7 @@ gcc \
   src/tests/testframe.c \
   src/tests/base_tests.c \
   src/tests/coords_tests.c \
+  src/tests/coord_vec_tests.c \
   src/tests/parse_tests.c \
   src/tests.c \
   -Wall \
