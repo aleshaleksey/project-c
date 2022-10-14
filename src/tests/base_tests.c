@@ -32,20 +32,10 @@ int test_recalc_4() {
 
 int recalc_tests() {
   printf("Running `base-helper` tests\n\n");
-
-  if(testframe_run_test("test_recalc_1", &test_recalc_1)==0) {
-    return 1;
-  }
-  if(testframe_run_test("test_recalc_2", &test_recalc_2)==0) {
-    return 1;
-  }
-  if(testframe_run_test("test_recalc_3", &test_recalc_3)==0) {
-    return 1;
-  }
-  if(testframe_run_test("test_recalc_4", &test_recalc_4)==0) {
-    return 1;
-  }
-
+  test_and_ret(test_recalc_1);
+  test_and_ret(test_recalc_2);
+  test_and_ret(test_recalc_3);
+  test_and_ret(test_recalc_4);
   printf("\nAll `base-helper` tests complete successfully.\n");
   return 0;
 }

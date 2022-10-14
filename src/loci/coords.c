@@ -18,6 +18,10 @@ int64_t sqrt2(int64_t x2) {
   }
 }
 
+int64_t coords_sqrt2(int64_t x2) {
+  return sqrt2(x2);
+}
+
 // Represents a coordinate point in space and time.
 struct Coords new_coords(int64_t x, int64_t y, int64_t z, int64_t t) {
     struct Coords output;

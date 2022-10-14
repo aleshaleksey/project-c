@@ -15,3 +15,4 @@ int64_t dt_coords(struct Coords *a, struct Coords *b);
 int64_t len_coords(struct Coords *a);
 char *coords_str(struct Coords *coords);
 void coords_print(struct Coords *coords);
+int64_t coords_sqrt2(int64_t x2);
