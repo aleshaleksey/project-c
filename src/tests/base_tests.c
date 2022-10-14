@@ -31,7 +31,7 @@ int test_recalc_4() {
 }
 
 int recalc_tests() {
-  printf("Running `base-helper` tests\n\n");
+  printf("\nRunning `base-helper` tests\n\n");
   test_and_ret(test_recalc_1);
   test_and_ret(test_recalc_2);
   test_and_ret(test_recalc_3);

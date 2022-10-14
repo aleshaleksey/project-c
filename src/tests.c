@@ -11,5 +11,6 @@ int main(int argc, char **argv) {
   printf("\nTests will run here once they are ready.\n\n");
   recalc_tests();
   coords_tests();
+  coord_vec_tests();
   printf("\nTesting `project-march` over.\n\n");
 }

@@ -16,7 +16,7 @@ struct CoordVec coordvec_new_with_cap(int64_t cap) {
     struct CoordVec output;
     output.coords = (struct Coords *)malloc(sizeof(struct Coords) * cap);
     output.len = 0;
-    output.len = cap;
+    output.cap = cap;
     return output;
 }
 
@@ -34,20 +34,24 @@ void coordvec_push(struct CoordVec *vec, struct Coords next_coord) {
     vec->len++;
 }
 
-struct Coords *coordvec_pop(struct CoordVec *vec) {
+struct Coords coordvec_pop(struct CoordVec *vec) {
     // Early return.
-    if(vec->len == 0) { return NULL; }
+    if(vec->len == 0) {
+      return new_coords(
+        (int64_t )NULL,
+        (int64_t )NULL,
+        (int64_t )NULL,
+        (int64_t )NULL);
+    }
     vec->len--;
     // Deallocate as necessary.
+    struct Coords out = vec->coords[vec->len];
     if(vec->len%20 == 0) {
       long l = vec->len * sizeof(struct Coords);
       vec->coords = (struct Coords *)realloc((void *)vec->coords, l);
       vec->cap = l;
     }
 
-    struct Coords last = vec->coords[vec->len];
-    struct Coords *out = (struct Coords *)malloc(sizeof(struct Coords) * 1);
-    out[0] = last;
     return out;
 }
 
@@ -67,7 +71,7 @@ int64_t coordvec_t_len(struct CoordVec *vec) {
   if(vec->len < 2) { return 0; }
   int64_t output = 0;
   for(long i=0; i<vec->len - 1; i++) {
-    output+= dt_coords(&vec->coords[i], &vec->coords[i+1]);
+    output+= dt_coords(&vec->coords[i+1], &vec->coords[i]);
   }
   return output;
 }
